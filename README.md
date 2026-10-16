@@ -1,4 +1,19 @@
-# PowerZoo
+<h1 align="center">PowerZoo</h1>
+
+<p align="center"><strong>A Python-based power-system benchmark for reinforcement learning.</strong></p>
+
+<p align="center">
+  <a href="https://arxiv.org/abs/2609.36052"><strong>Paper</strong></a> ·
+  <a href="https://panzhanhua.github.io/PowerZooPy/"><strong>Documentation</strong></a> ·
+  <a href="https://github.com/PanZhanhua/PowerZooJax"><strong>JAX version</strong></a>
+</p>
+
+<p align="center">
+  <a href="https://arxiv.org/abs/2609.36052"><img alt="arXiv 2609.36052" src="https://img.shields.io/badge/arXiv-2609.36052-b31b1b?logo=arxiv&logoColor=white"></a>
+  <img alt="Python 3.10–3.12" src="https://img.shields.io/badge/python-3.10%E2%80%933.12-3776AB?logo=python&logoColor=white">
+  <img alt="Gymnasium | PettingZoo | RLlib" src="https://img.shields.io/badge/API-Gymnasium%20%C2%B7%20PettingZoo%20%C2%B7%20RLlib-informational">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-3DA639">
+</p>
 
 This is the code release of **PowerZooPy**, the companion object-oriented
 Python implementation of the five benchmark tasks in the paper
