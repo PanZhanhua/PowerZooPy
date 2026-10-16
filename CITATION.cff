@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use PowerZooPy, please cite the paper below."
+type: software
+title: "PowerZooPy"
+abstract: "Companion object-oriented Python implementation of the PowerZooJax benchmark tasks, exposing Gymnasium / PettingZoo / RLlib-compatible power-grid environments."
+authors:
+  - family-names: Pan
+    given-names: Zhanhua
+    affiliation: Nanyang Technological University
+  - family-names: Liu
+    given-names: Xiao
+    affiliation: Cornell University
+  - family-names: Cao
+    given-names: Zhilong
+    affiliation: Nanyang Technological University
+  - family-names: Wang
+    given-names: Jianhong
+    affiliation: University of Bristol
+  - family-names: Qiu
+    given-names: Dawei
+    affiliation: Nanyang Technological University
+repository-code: "https://github.com/PanZhanhua/PowerZooPy"
+url: "https://panzhanhua.github.io/PowerZooPy/"
+license: MIT
+preferred-citation:
+  type: article
+  title: "PowerZooJax: A JAX-based Power System Benchmark for Reinforcement Learning"
+  authors:
+    - family-names: Pan
+      given-names: Zhanhua
+      affiliation: Nanyang Technological University
+    - family-names: Liu
+      given-names: Xiao
+      affiliation: Cornell University
+    - family-names: Cao
+      given-names: Zhilong
+      affiliation: Nanyang Technological University
+    - family-names: Wang
+      given-names: Jianhong
+      affiliation: University of Bristol
+    - family-names: Qiu
+      given-names: Dawei
+      affiliation: Nanyang Technological University
+  journal: "arXiv preprint arXiv:2609.36052"
+  year: 2026
+  doi: "10.48550/arXiv.2609.36052"
+  url: "https://arxiv.org/abs/2609.36052"
