@@ -1,6 +1,6 @@
-<h1 align="center">PowerZoo</h1>
+<h1 align="center">PowerZooPy</h1>
 
-<p align="center"><strong>A Python-based power-system benchmark for reinforcement learning.</strong></p>
+<p align="center"><strong>Composable power-system environments for reinforcement learning in Python, with Gymnasium and PettingZoo APIs.</strong></p>
 
 <p align="center">
   <a href="https://arxiv.org/abs/2609.36052"><strong>Paper</strong></a> ·
@@ -15,34 +15,27 @@
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-3DA639">
 </p>
 
-This is the code release of **PowerZooPy**, the companion object-oriented
-Python implementation of the five benchmark tasks in the paper
-[PowerZooJax: A JAX-based Power System Benchmark for Reinforcement Learning](https://arxiv.org/abs/2609.36052).
-In the paper it serves as the CPU environment backend for the SB3 / SBX
-baselines; the JAX version lives at
-[PowerZooJax](https://github.com/PanZhanhua/PowerZooJax).
-If you find the code or paper useful for your work, please cite:
+PowerZooPy is a modular, object-oriented Python library for building
+reinforcement-learning environments for power systems. Transmission and
+distribution grids, controllable resources (batteries, EVs, solar, wind,
+flexible loads, data centers), electricity markets, and DC microgrids are
+separate components that compose into environments: resources attach to a
+parent grid, and markets run on top of a grid's OPF backend. Every
+environment is exposed through Gymnasium / PettingZoo / RLlib-compatible
+interfaces.
 
-```bibtex
-@misc{pan2026powerzoojax,
-      title={PowerZooJax: A JAX-based Power System Benchmark for Reinforcement Learning},
-      author={Zhanhua Pan and Xiao Liu and Zhilong Cao and Jianhong Wang and Dawei Qiu},
-      year={2026},
-      eprint={2609.36052},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2609.36052},
-}
-```
+Tasks sit on top of these components and are registered by name. A new task
+can be a `Task` subclass registered with `register_task`, or simply an
+inline config dict passed to `make_task_env`. The library ships the five
+reference benchmark suites shared with PowerZooJax, smaller starter tasks
+for quick iteration, and fixed train/val/test splits drawn from real GB
+half-hourly grid traces.
 
-PowerZoo is a power-grid simulation library that exposes Gymnasium /
-PettingZoo / RLlib-compatible environments for reinforcement-learning
-research. It packages transmission and distribution grid simulations,
-controllable resources (batteries, EVs, solar, wind, flexible loads, data
-centers), DC microgrids, and electricity markets behind a single task-based
-API, and ships fixed train/val/test splits drawn from real GB half-hourly
-grid traces.
+For GPU-batched training at scale, see
+[PowerZooJax](https://github.com/PanZhanhua/PowerZooJax), a pure-JAX
+implementation of the same benchmark tasks.
 
+- Python package: `powerzoo`
 - Python: 3.10 – 3.12
 - License: MIT
 - Version: 0.2.0
@@ -305,9 +298,19 @@ Reference outputs for power-flow tests are stored under
 
 ## Citation
 
-If you use PowerZooPy in your research, please cite the paper with the
-BibTeX entry at the top of this README, or use GitHub's
-"Cite this repository" button (generated from [CITATION.cff](CITATION.cff)).
+If you use PowerZooPy in your research, please cite:
+
+```bibtex
+@misc{pan2026powerzoojax,
+      title={PowerZooJax: A JAX-based Power System Benchmark for Reinforcement Learning},
+      author={Zhanhua Pan and Xiao Liu and Zhilong Cao and Jianhong Wang and Dawei Qiu},
+      year={2026},
+      eprint={2609.36052},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2609.36052},
+}
+```
 
 ## License
 
