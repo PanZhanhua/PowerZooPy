@@ -35,12 +35,6 @@ For GPU-batched training at scale, see
 [PowerZooJax](https://github.com/PanZhanhua/PowerZooJax), a pure-JAX
 implementation of the same benchmark tasks.
 
-- Python package: `powerzoo`
-- Python: 3.10 – 3.12
-- License: MIT
-- Version: 0.2.0
-- Documentation: [PowerZoo docs](https://panzhanhua.github.io/PowerZooPy/)
-
 ## Install
 
 PowerZoo uses [uv](https://github.com/astral-sh/uv) for dependency
