@@ -286,6 +286,7 @@ def backward_sweep(
     # because child-line losses would never feed back into parent branch power.
     v_sending_sq = np.maximum(v_sq[topo.sending_nodes], _CURRENT_DENOMINATOR_FLOOR_V_SQ)
     i_sq = (p_branch_old ** 2 + q_branch_old ** 2) / v_sending_sq
+    i_sq = np.minimum(i_sq, v_sending_sq / (topo.r_pu ** 2 + topo.x_pu ** 2))
     p_loss = topo.r_pu * i_sq
     q_loss = topo.x_pu * i_sq
 
@@ -416,14 +417,15 @@ def run_bfs_power_flow(topo: RadialTopology, p_load_pu: np.ndarray, q_load_pu: n
     for iteration in range(max_iter):
         iteration_count = iteration + 1
         v_sq_old = v_sq.copy()
+        p_branch_old, q_branch_old = p_branch, q_branch
 
         p_branch, q_branch = backward_sweep(
             topo,
             p_load_pu,
             q_load_pu,
             v_sq,
-            p_branch_old=p_branch,
-            q_branch_old=q_branch,
+            p_branch_old=p_branch_old,
+            q_branch_old=q_branch_old,
             p_branch_base=p_branch_base,
             q_branch_base=q_branch_base,
         )
@@ -432,13 +434,18 @@ def run_bfs_power_flow(topo: RadialTopology, p_load_pu: np.ndarray, q_load_pu: n
         )
         voltage_collapse = voltage_collapse or collapse_now
 
-        max_diff = np.max(np.abs(v_sq - v_sq_old))
+        max_diff = max(np.max(np.abs(v_sq - v_sq_old)),
+                       np.max(np.abs(p_branch - p_branch_old), initial=0.0),
+                       np.max(np.abs(q_branch - q_branch_old), initial=0.0))
         if max_diff < tol:
             reached_tolerance = True
             break
 
     is_diverged = not reached_tolerance
-    converged = reached_tolerance and not voltage_collapse
+    v_sending_sq = np.maximum(v_sq[topo.sending_nodes], _CURRENT_DENOMINATOR_FLOOR_V_SQ)
+    cap_active = bool(np.any(p_branch ** 2 + q_branch ** 2
+                             > v_sending_sq ** 2 / (topo.r_pu ** 2 + topo.x_pu ** 2)))
+    converged = reached_tolerance and not voltage_collapse and not cap_active
 
     # p_slack / q_slack: total power the slack bus must inject.
     # The backward sweep only accumulates loads *downstream* of each line, so
